@@ -1,0 +1,20 @@
+from module_17.homework_17_1.app.backend.db import Base
+from sqlalchemy import Column, Integer, String
+from sqlalchemy.orm import relationship
+from module_17.homework_17_1.app.models import *
+
+class User(Base):
+    __tablename__ = 'users'
+    __table_args__ = {'keep_existing': True}
+    id = Column(Integer, primary_key=True, index=True)
+    username = Column(String)
+    firstname = Column(String)
+    lastname = Column(String)
+    age = Column(Integer)
+    slug = Column(String, unique=True, index=True)
+
+    tasks = relationship('Task', back_populates='user')
+
+# Testing for writing code
+# from sqlalchemy.schema import CreateTable
+# print(CreateTable(User.__table__))
